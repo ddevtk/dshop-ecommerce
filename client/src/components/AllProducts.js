@@ -4,7 +4,7 @@ import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
 
 const AllProducts = ({ data }) => {
-  const { image, name, price, id, rating } = data;
+  const { image, name, price, _id, rating } = data;
   let value = 0;
   let precision = 0;
   if (rating % Math.floor(rating) === 0.5) {
@@ -21,7 +21,7 @@ const AllProducts = ({ data }) => {
       <div className='text-left'>
         <div>
           <Link
-            to={`/products/${id}`}
+            to={`/products/${_id}`}
             style={{ color: 'black', textDecoration: 'none' }}
           >
             <div className='text-center'>

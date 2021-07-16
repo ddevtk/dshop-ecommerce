@@ -1,6 +1,8 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
+const cors = require('cors');
+const productsRoute = require('./routes/productRoutes');
 
 dotenv.config({ path: './config.env' });
 
@@ -15,6 +17,9 @@ mongoose
     useFindAndModify: false,
   })
   .then(() => console.log('DB connection successful!'));
+
+// app.use(cors());
+app.use('/api', productsRoute);
 
 const port = process.env.PORT;
 app.get('/', (req, res) => res.send('Hello World!'));

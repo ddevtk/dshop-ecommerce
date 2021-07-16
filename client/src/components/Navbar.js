@@ -31,9 +31,9 @@ export default function Navbar() {
           <FaBars className='navbar-toggler-icon color-white' />
         </button>
         <div
-          className='collapse navbar-collapse'
-          style={{ justifyContent: 'flex-end' }}
+          className='navbar-collapse collapse'
           id='navbarSupportedContent'
+          style={{ justifyContent: 'flex-end' }}
         >
           <div className='d-flex justify-content-end'>
             <ul className='navbar-nav me-auto mb-2 mb-lg-0'>
