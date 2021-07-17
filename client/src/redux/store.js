@@ -10,9 +10,13 @@ const composeEnhancers = composeWithDevTools({
 const cart = localStorage.getItem('cart')
   ? JSON.parse(localStorage.getItem('cart'))
   : {};
+const currentUser = localStorage.getItem('currentUser')
+  ? JSON.parse(localStorage.getItem('currentUser'))
+  : null;
 
 const initialState = {
   cart: { ...cart },
+  login: currentUser,
 };
 
 const store = createStore(

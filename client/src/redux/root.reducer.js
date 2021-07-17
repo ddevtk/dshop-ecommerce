@@ -4,13 +4,14 @@ import {
   allProductReducer,
   singleProductReducer,
 } from './products/product.reducer';
-
-console.log(cartReducer);
+import { signupReducer, loginReducer } from './user/user.reducer';
 
 const rootReducer = combineReducers({
   products: allProductReducer,
   singleProduct: singleProductReducer,
   cart: cartReducer,
+  signup: signupReducer,
+  login: loginReducer,
 });
 
 export default rootReducer;

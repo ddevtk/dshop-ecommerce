@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/ddevtk/dshop-ecommerce#readme",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "concurrently": "^6.2.0",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",

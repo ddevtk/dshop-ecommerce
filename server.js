@@ -3,6 +3,8 @@ const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const productsRoute = require('./routes/productRoutes');
+const userRoute = require('./routes/userRoutes');
+const bodyParser = require('body-parser');
 
 dotenv.config({ path: './config.env' });
 
@@ -18,8 +20,9 @@ mongoose
   })
   .then(() => console.log('DB connection successful!'));
 
-// app.use(cors());
+app.use(bodyParser.json());
 app.use('/api', productsRoute);
+app.use('/api/users', userRoute);
 
 const port = process.env.PORT;
 app.get('/', (req, res) => res.send('Hello World!'));
