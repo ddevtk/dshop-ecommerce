@@ -7,8 +7,17 @@ const composeEnhancers = composeWithDevTools({
   // Specify here name, actionsBlacklist, actionsCreators and other options
 });
 
+const cart = localStorage.getItem('cart')
+  ? JSON.parse(localStorage.getItem('cart'))
+  : {};
+
+const initialState = {
+  cart: { ...cart },
+};
+
 const store = createStore(
   rootReducer,
+  initialState,
   composeEnhancers(applyMiddleware(thunk))
 );
 

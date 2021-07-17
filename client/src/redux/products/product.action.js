@@ -21,7 +21,6 @@ export const getSingleProduct = productId => async dispatch => {
 
   try {
     const res = await axios.get(`/api/products/${productId}`);
-    console.log(res);
 
     dispatch({
       type: ProductActionType.GET_SINGLE_PRODUCT_SUCCESS,

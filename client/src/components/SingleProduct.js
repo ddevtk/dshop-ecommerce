@@ -6,20 +6,28 @@ import Rating from '@material-ui/lab/Rating';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSingleProduct } from '../redux/products/product.action';
 import { Fragment } from 'react';
+import { addToCart } from '../redux/cart/cart.action';
 
 const SingleProduct = () => {
   const params = useParams();
   const history = useHistory();
   const { id } = params;
   const [value, setValue] = useState(4);
+  const [quantity, setQuantity] = useState(1);
 
   const dispatch = useDispatch();
+
   const { isLoading, isError, product } = useSelector(
     state => state.singleProduct
   );
 
+  const addToCartHandler = () => {
+    dispatch(addToCart(quantity, product));
+  };
+
   useEffect(() => {
     dispatch(getSingleProduct(id));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -28,6 +36,7 @@ const SingleProduct = () => {
         history.push('/');
       }, 3000);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isError]);
 
   return (
@@ -70,7 +79,12 @@ const SingleProduct = () => {
                 <h1>Price: {product.price}</h1>
                 <hr />
                 <h1>Select quantity</h1>
-                <select>
+                <select
+                  value={quantity}
+                  onChange={e => {
+                    setQuantity(e.target.value);
+                  }}
+                >
                   {Array.from(
                     { length: product.countInStock },
                     (value, idx) => {
@@ -83,9 +97,19 @@ const SingleProduct = () => {
                   )}
                 </select>
                 <hr />
-                <button type='button' className='btn btn-dark'>
-                  ADD TO CART
-                </button>
+                {product.countInStock === 0 ? (
+                  <button type='button' className='btn btn-dark' disabled>
+                    ADD TO CART
+                  </button>
+                ) : (
+                  <button
+                    type='button'
+                    className='btn btn-dark'
+                    onClick={addToCartHandler}
+                  >
+                    ADD TO CART
+                  </button>
+                )}
               </div>
               <hr />
               <div className='shadow p-3 mb-5 bg-white rounded ml-2 mr-3'>

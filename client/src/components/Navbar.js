@@ -1,9 +1,11 @@
 import React from 'react';
 import { FaBars } from 'react-icons/fa';
 import { MdShoppingCart } from 'react-icons/md';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 export default function Navbar() {
+  const { totalAmount } = useSelector(state => state.cart);
   return (
     <nav className='navbar navbar-expand-lg navbar-light bg-light'>
       <div className='container-fluid'>
@@ -53,7 +55,8 @@ export default function Navbar() {
                   style={{ fontSize: '20px' }}
                   to='/cart'
                 >
-                  <MdShoppingCart />0
+                  <MdShoppingCart />
+                  {totalAmount}
                 </Link>
               </li>
             </ul>

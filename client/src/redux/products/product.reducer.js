@@ -33,7 +33,6 @@ const singleProductReducer = (state = initialSingleProducts, action) => {
       return { ...state, isLoading: true };
 
     case ProductActionType.GET_SINGLE_PRODUCT_SUCCESS:
-      console.log(action.payload);
       return { ...state, isLoading: false, product: action.payload };
 
     case ProductActionType.GET_SINGLE_PRODUCT_ERROR:
