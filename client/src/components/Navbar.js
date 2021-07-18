@@ -8,7 +8,7 @@ import { logoutUser } from '../redux/user/user.action';
 export default function Navbar() {
   const { totalAmount } = useSelector(state => state.cart);
 
-  const currentUser = useSelector(state => state.currentUser);
+  const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
   const dispatch = useDispatch();
 
@@ -52,7 +52,7 @@ export default function Navbar() {
               <li className='nav-item'>
                 {currentUser ? (
                   <div
-                    class='dropdown'
+                    className='dropdown'
                     style={{
                       height: '100%',
                       display: 'flex',
@@ -63,7 +63,7 @@ export default function Navbar() {
                   >
                     <button
                       style={{ color: 'white', marginLeft: '-10px' }}
-                      class='btn dropdown-toggle'
+                      className='btn dropdown-toggle'
                       type='button'
                       id='dropdownMenuButton1'
                       data-bs-toggle='dropdown'
@@ -77,16 +77,16 @@ export default function Navbar() {
                         currentUser.name.slice(1)}
                     </button>
                     <div
-                      class='dropdown-menu'
+                      className='dropdown-menu'
                       aria-labelledby='dropdownMenuButton1'
                     >
-                      <Link class='dropdown-item' to='/profile'>
+                      <Link className='dropdown-item' to='/profile'>
                         Profile
                       </Link>
-                      <Link class='dropdown-item' to='/order'>
+                      <Link className='dropdown-item' to='/order'>
                         Order
                       </Link>
-                      <button class='dropdown-item' onClick={logout}>
+                      <button className='dropdown-item' onClick={logout}>
                         Logout <i className='fas fa-sign-out-alt'></i>
                       </button>
                     </div>

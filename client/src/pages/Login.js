@@ -21,10 +21,10 @@ function Login() {
     dispatch(loginUser(user));
   };
 
-  const user = useSelector(state => state.currentUser);
+  const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
   useEffect(() => {
-    if (user) {
+    if (currentUser) {
       window.location.href = '/';
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

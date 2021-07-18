@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Error from '../components/Error';
@@ -14,6 +14,7 @@ function Signup() {
   const dispatch = useDispatch();
 
   const { isLoading, isError } = useSelector(state => state.signup);
+  const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
   const submitHandler = e => {
     e.preventDefault();
@@ -27,6 +28,13 @@ function Signup() {
       dispatch(signNewUser(user));
     }
   };
+
+  useEffect(() => {
+    if (currentUser?.name) {
+      window.location.href = '/';
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div>
