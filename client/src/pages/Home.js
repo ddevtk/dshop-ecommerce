@@ -3,6 +3,7 @@ import AllProducts from '../components/AllProducts';
 import Loading from '../components/Loading';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllProducts } from '../redux/products/product.action';
+import Error from '../components/Error';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -16,7 +17,7 @@ const Home = () => {
   return (
     <div className='row justify-content-center'>
       {isLoading && <Loading type='spokes' color='#010133' />}
-      {isError && <h1>Some thing went wrong</h1>}
+      {isError && <Error error='Some thing went wrong...' />}
       {!isLoading &&
         products.map(data => {
           return <AllProducts key={data._id} data={data} />;

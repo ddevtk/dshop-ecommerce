@@ -1,5 +1,8 @@
 import React, { useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import Error from '../components/Error';
+import LoadingSpinner from '../components/LoadingSpinner';
 import { signNewUser } from '../redux/user/user.action';
 
 function Signup() {
@@ -9,6 +12,8 @@ function Signup() {
   const cPwd = useRef(null);
 
   const dispatch = useDispatch();
+
+  const { isLoading, isError } = useSelector(state => state.signup);
 
   const submitHandler = e => {
     e.preventDefault();
@@ -37,6 +42,8 @@ function Signup() {
               </h2>
               <i className='fa fa-user-plus' style={{ fontSize: '25px' }}></i>
             </div>
+            {isError && <Error error={isError} />}
+            {isLoading && <LoadingSpinner />}
             <form onSubmit={e => submitHandler(e)}>
               <input
                 className='form-control'
@@ -75,6 +82,13 @@ function Signup() {
               </div>
             </form>
           </div>
+          <Link
+            to='/login'
+            className='text-center mt-3'
+            style={{ textDecoration: 'none', color: 'black' }}
+          >
+            Click here to login
+          </Link>
         </div>
       </div>
     </div>

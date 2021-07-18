@@ -5,6 +5,7 @@ const signupState = {
   isError: false,
   isSuccess: false,
 };
+
 const loginState = {
   isLoading: false,
   isError: false,
@@ -32,7 +33,7 @@ const signupReducer = (state = signupState, action) => {
       return {
         ...state,
         isLoading: false,
-        isError: 'email already register',
+        isError: 'Email already register',
       };
     default:
       return state;
@@ -61,6 +62,9 @@ const loginReducer = (state = loginState, action) => {
         isLoading: false,
         isError: 'invalid credentials',
       };
+
+    case userActionType.LOGOUT_USER:
+      return { ...state };
     default:
       return state;
   }

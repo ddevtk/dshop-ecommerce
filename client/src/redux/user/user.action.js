@@ -8,6 +8,8 @@ export const signNewUser = user => async dispatch => {
     const res = await axios.post('/api/users/signup', user);
 
     dispatch({ type: userActionType.SIGNUP_SUCCESS });
+
+    window.location.href = '/login';
   } catch (error) {
     dispatch({ type: userActionType.SIGNUP_ERROR });
   }
@@ -27,4 +29,13 @@ export const loginUser = user => async dispatch => {
     console.log(error);
     dispatch({ type: userActionType.LOGIN_ERROR });
   }
+};
+
+export const logoutUser = () => dispatch => {
+  localStorage.removeItem('cart');
+  localStorage.removeItem('currentUser');
+
+  dispatch({ type: userActionType.LOGOUT_USER });
+
+  window.location.href = '/';
 };

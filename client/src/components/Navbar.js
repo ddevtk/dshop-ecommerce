@@ -1,11 +1,21 @@
 import React from 'react';
 import { FaBars } from 'react-icons/fa';
 import { MdShoppingCart } from 'react-icons/md';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { logoutUser } from '../redux/user/user.action';
 
 export default function Navbar() {
   const { totalAmount } = useSelector(state => state.cart);
+
+  const currentUser = useSelector(state => state.currentUser);
+
+  const dispatch = useDispatch();
+
+  const logout = () => {
+    dispatch(logoutUser());
+  };
+
   return (
     <nav className='navbar navbar-expand-lg navbar-light bg-light'>
       <div className='container-fluid'>
@@ -40,14 +50,57 @@ export default function Navbar() {
           <div className='d-flex justify-content-end'>
             <ul className='navbar-nav me-auto mb-2 mb-lg-0'>
               <li className='nav-item'>
-                <Link
-                  className='nav-link active'
-                  style={{ fontSize: '20px' }}
-                  aria-current='page'
-                  to='/login'
-                >
-                  Login
-                </Link>
+                {currentUser ? (
+                  <div
+                    class='dropdown'
+                    style={{
+                      height: '100%',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      marginRight: '30px',
+                    }}
+                  >
+                    <button
+                      style={{ color: 'white', marginLeft: '-10px' }}
+                      class='btn dropdown-toggle'
+                      type='button'
+                      id='dropdownMenuButton1'
+                      data-bs-toggle='dropdown'
+                      aria-expanded='false'
+                    >
+                      <i
+                        className='fa fa-user'
+                        style={{ marginRight: '10px' }}
+                      />
+                      {currentUser.name[0].toUpperCase() +
+                        currentUser.name.slice(1)}
+                    </button>
+                    <div
+                      class='dropdown-menu'
+                      aria-labelledby='dropdownMenuButton1'
+                    >
+                      <Link class='dropdown-item' to='/profile'>
+                        Profile
+                      </Link>
+                      <Link class='dropdown-item' to='/order'>
+                        Order
+                      </Link>
+                      <button class='dropdown-item' onClick={logout}>
+                        Logout <i className='fas fa-sign-out-alt'></i>
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <Link
+                    className='nav-link active'
+                    style={{ fontSize: '20px' }}
+                    aria-current='page'
+                    to='/login'
+                  >
+                    Login
+                  </Link>
+                )}
               </li>
               <li className='nav-item'>
                 <Link

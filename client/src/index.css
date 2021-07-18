@@ -37,3 +37,6 @@ input {
   border-color: #010133 !important;
   margin-bottom: 10px;
 }
+.btn:focus {
+  box-shadow: none;
+}
