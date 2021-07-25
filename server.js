@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const productsRoute = require('./routes/productRoutes');
 const userRoute = require('./routes/userRoutes');
+const orderRoute = require('./routes/orderRoutes');
 const bodyParser = require('body-parser');
 
 dotenv.config({ path: './config.env' });
@@ -23,6 +24,7 @@ mongoose
 app.use(bodyParser.json());
 app.use('/api', productsRoute);
 app.use('/api/users', userRoute);
+app.use('/api/orders', orderRoute);
 
 const port = process.env.PORT;
 app.get('/', (req, res) => res.send('Hello World!'));

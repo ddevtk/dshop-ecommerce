@@ -27,7 +27,7 @@ const AllProducts = ({ data }) => {
             <div className='text-center'>
               <img src={image} alt={name} className='img-fluid' />
             </div>
-            <h1>{name}</h1>
+            <h1>{name.slice(0, 20)}...</h1>
             <Box component='fieldset' mb={3} borderColor='transparent'>
               <Rating
                 name='customized-empty'
@@ -36,7 +36,13 @@ const AllProducts = ({ data }) => {
                 readOnly
               />
             </Box>
-            <h1>Price: {price} VND</h1>
+            <h1>
+              Price:
+              {new Intl.NumberFormat('vn', {
+                style: 'currency',
+                currency: 'VND',
+              }).format(price)}
+            </h1>
           </Link>
         </div>
       </div>

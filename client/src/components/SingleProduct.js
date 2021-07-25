@@ -4,7 +4,6 @@ import Loading from '../components/Loading';
 import 'antd/dist/antd.css';
 import { Rate } from 'antd';
 
-import Rating from '@material-ui/lab/Rating';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSingleProduct } from '../redux/products/product.action';
 import { addToCart } from '../redux/cart/cart.action';
@@ -77,7 +76,13 @@ const SingleProduct = () => {
             </div>
             <div className='col-md-6 text-left'>
               <div className='m-2 shadow p-3 mb-5 bg-white rounded'>
-                <h1>Price: {product.price}</h1>
+                <h1>
+                  Price:
+                  {new Intl.NumberFormat('vn', {
+                    style: 'currency',
+                    currency: 'VND',
+                  }).format(product.price)}
+                </h1>
                 <hr />
                 <h1>Select quantity</h1>
                 <select
