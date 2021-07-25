@@ -1,0 +1,6 @@
+const orderActionType = {
+  PLACE_ORDER_REQUEST: 'PLACE_ORDER_REQUEST',
+  PLACE_ORDER_SUCCESS: 'PLACE_ORDER_SUCCESS',
+  PLACE_ORDER_ERROR: 'PLACE_ORDER_ERROR',
+};
+export default orderActionType;

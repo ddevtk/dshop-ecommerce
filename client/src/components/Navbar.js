@@ -8,7 +8,7 @@ import { logoutUser } from '../redux/user/user.action';
 export default function Navbar() {
   const { totalAmount } = useSelector(state => state.cart);
 
-  const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  const { user } = useSelector(state => state.login);
 
   const dispatch = useDispatch();
 
@@ -50,7 +50,7 @@ export default function Navbar() {
           <div className='d-flex justify-content-end'>
             <ul className='navbar-nav me-auto mb-2 mb-lg-0'>
               <li className='nav-item'>
-                {currentUser ? (
+                {user ? (
                   <div
                     className='dropdown'
                     style={{
@@ -73,8 +73,7 @@ export default function Navbar() {
                         className='fa fa-user'
                         style={{ marginRight: '10px' }}
                       />
-                      {currentUser.name[0].toUpperCase() +
-                        currentUser.name.slice(1)}
+                      {user.name[0].toUpperCase() + user.name.slice(1)}
                     </button>
                     <div
                       className='dropdown-menu'

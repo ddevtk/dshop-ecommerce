@@ -11,7 +11,7 @@ function Login() {
   const history = useHistory();
 
   const dispatch = useDispatch();
-  const { isLoading, isError } = useSelector(state => state.login);
+  const { isLoading, isError, user } = useSelector(state => state.login);
 
   const submitHandler = e => {
     e.preventDefault();
@@ -22,10 +22,14 @@ function Login() {
     dispatch(loginUser(user));
   };
 
-  const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  useEffect(() => {
+    if (user) {
+      window.location.href = '/';
+    }
+  }, [user]);
 
   useEffect(() => {
-    if (currentUser) {
+    if (user) {
       history.push('/');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

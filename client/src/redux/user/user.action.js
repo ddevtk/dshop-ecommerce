@@ -16,16 +16,14 @@ export const signNewUser = user => async dispatch => {
   }
 };
 
-export const loginUser = user => async dispatch => {
+export const loginUser = user => async (dispatch, getState) => {
   dispatch({ type: userActionType.LOGIN_REQUEST });
 
   try {
     const res = await axios.post('/api/users/login', user);
 
     dispatch({ type: userActionType.LOGIN_SUCCESS, payload: res.data });
-    localStorage.setItem('currentUser', JSON.stringify(res.data));
-
-    window.location.href = '/';
+    localStorage.setItem('currentUser', JSON.stringify(getState().login));
   } catch (error) {
     console.log(error);
     dispatch({ type: userActionType.LOGIN_ERROR });
