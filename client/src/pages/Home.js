@@ -4,10 +4,13 @@ import Loading from '../components/Loading';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllProducts } from '../redux/products/product.action';
 import Error from '../components/Error';
+import Filter from '../components/Filter';
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { isLoading, isError, products } = useSelector(state => state.products);
+  const { isLoading, isError, products, isAll, filterProducts } = useSelector(
+    state => state.products
+  );
 
   useEffect(() => {
     dispatch(getAllProducts());
@@ -16,6 +19,7 @@ const Home = () => {
 
   return (
     <div className='row justify-content-center'>
+      <Filter products={products} />
       {isLoading && <Loading type='spokes' color='#010133' />}
       {isError && <Error error='Some thing went wrong...' />}
       {!isLoading &&

@@ -40,7 +40,6 @@ router.post('/login', (req, res) => {
           name: doc[0].name,
           email: doc[0].email,
         };
-        console.log(user);
         res.send(user);
       } else {
         return res

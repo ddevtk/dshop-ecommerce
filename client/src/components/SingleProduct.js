@@ -5,7 +5,6 @@ import Loading from '../components/Loading';
 import Rating from '@material-ui/lab/Rating';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSingleProduct } from '../redux/products/product.action';
-import { Fragment } from 'react';
 import { addToCart } from '../redux/cart/cart.action';
 
 const SingleProduct = () => {
@@ -40,7 +39,7 @@ const SingleProduct = () => {
   }, [isError]);
 
   return (
-    <Fragment>
+    <div style={{ padding: '0 2rem' }}>
       {isLoading && (
         <div className='row justify-content-center'>
           <Loading type='spokes' color='#010133' />
@@ -136,7 +135,7 @@ const SingleProduct = () => {
           </div>
         </div>
       )}
-    </Fragment>
+    </div>
   );
 };
 export default SingleProduct;

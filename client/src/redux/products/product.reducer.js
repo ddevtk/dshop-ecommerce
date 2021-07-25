@@ -12,15 +12,24 @@ const allProductReducer = (state = initialAllProducts, action) => {
       return { ...state, isLoading: true };
 
     case ProductActionType.GET_ALL_PRODUCT_SUCCESS:
-      return { ...state, isLoading: false, products: action.payload };
+      return {
+        ...state,
+        isLoading: false,
+        products: action.payload,
+      };
 
     case ProductActionType.GET_ALL_PRODUCT_ERROR:
-      return { ...state, isLoading: false, isError: action.payload };
+      return {
+        ...state,
+        isLoading: false,
+        isError: action.payload,
+      };
 
     default:
       return state;
   }
 };
+
 const initialSingleProducts = {
   isLoading: false,
   isError: null,
@@ -42,5 +51,4 @@ const singleProductReducer = (state = initialSingleProducts, action) => {
       return state;
   }
 };
-
-export { allProductReducer, singleProductReducer };
+export { singleProductReducer, allProductReducer };

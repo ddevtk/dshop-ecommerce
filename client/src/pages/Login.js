@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Error from '../components/Error';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { loginUser } from '../redux/user/user.action';
@@ -8,6 +8,7 @@ import { loginUser } from '../redux/user/user.action';
 function Login() {
   const email = useRef(null);
   const pwd = useRef(null);
+  const history = useHistory();
 
   const dispatch = useDispatch();
   const { isLoading, isError } = useSelector(state => state.login);
@@ -25,7 +26,7 @@ function Login() {
 
   useEffect(() => {
     if (currentUser) {
-      window.location.href = '/';
+      history.push('/');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -53,6 +54,7 @@ function Login() {
                 placeholder='email'
                 ref={email}
                 required
+                style={{ marginBottom: '10px' }}
               />
               <input
                 className='form-control'

@@ -1,14 +1,12 @@
 import React from 'react';
-import ReactLoading from 'react-loading';
+import 'antd/dist/antd.css';
+import { Spin } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
 
-const Loading = ({ type, color }) => (
-  <ReactLoading
-    className='loading'
-    type={type}
-    color={color}
-    height={'10%'}
-    width={'10%'}
-  />
-);
+const antIcon = <LoadingOutlined style={{ fontSize: '60px' }} spin />;
+
+const Loading = () => {
+  return <Spin indicator={antIcon} style={{ marginTop: '5rem' }} />;
+};
 
 export default Loading;
