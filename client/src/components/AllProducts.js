@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
+import { formatPrice } from '../utils/formatPrice';
 
 const AllProducts = ({ data }) => {
   const { image, name, price, _id, rating } = data;
@@ -27,7 +28,7 @@ const AllProducts = ({ data }) => {
             <div className='text-center'>
               <img src={image} alt={name} className='img-fluid' />
             </div>
-            <h1>{name.slice(0, 20)}...</h1>
+            <h1>{name.slice(0, 30)}...</h1>
             <Box component='fieldset' mb={3} borderColor='transparent'>
               <Rating
                 name='customized-empty'
@@ -36,13 +37,7 @@ const AllProducts = ({ data }) => {
                 readOnly
               />
             </Box>
-            <h1>
-              Price:
-              {new Intl.NumberFormat('vn', {
-                style: 'currency',
-                currency: 'VND',
-              }).format(price)}
-            </h1>
+            <h1>{`Price: ${formatPrice(price)}`}</h1>
           </Link>
         </div>
       </div>

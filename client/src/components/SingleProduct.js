@@ -7,6 +7,7 @@ import { Rate } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSingleProduct } from '../redux/products/product.action';
 import { addToCart } from '../redux/cart/cart.action';
+import { formatPrice } from '../utils/formatPrice';
 
 const SingleProduct = () => {
   const params = useParams();
@@ -76,13 +77,7 @@ const SingleProduct = () => {
             </div>
             <div className='col-md-6 text-left'>
               <div className='m-2 shadow p-3 mb-5 bg-white rounded'>
-                <h1>
-                  Price:
-                  {new Intl.NumberFormat('vn', {
-                    style: 'currency',
-                    currency: 'VND',
-                  }).format(product.price)}
-                </h1>
+                <h1>{`Price: ${formatPrice(product.price)}`}</h1>
                 <hr />
                 <h1>Select quantity</h1>
                 <select
@@ -117,7 +112,7 @@ const SingleProduct = () => {
                   </button>
                 )}
               </div>
-              <hr />
+
               <div className='shadow p-3 mb-5 bg-white rounded ml-2 mr-3'>
                 <h2>Give Your Review</h2>
                 <Rate
