@@ -26,7 +26,6 @@ const signupReducer = (state = signupState, action) => {
         ...state,
         isLoading: false,
         isSuccess: true,
-        user: action.payload,
       };
 
     case userActionType.SIGNUP_ERROR:
@@ -49,11 +48,13 @@ const loginReducer = (state = loginState, action) => {
       };
 
     case userActionType.LOGIN_SUCCESS:
+      console.log(action.payload);
       return {
         ...state,
         isLoading: false,
         isSuccess: true,
         isError: null,
+        user: action.payload,
       };
 
     case userActionType.LOGIN_ERROR:

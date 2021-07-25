@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Checkout from '../components/Checkout';
 import { addToCart, deleteItem } from '../redux/cart/cart.action';
 
 const Cart = () => {
-  const { cart, totalAmount, totalPrice } = useSelector(state => state.cart);
+  const { cart, totalPrice } = useSelector(state => state.cart);
 
   const dispatch = useDispatch();
+
+  const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
   return (
     <div>
@@ -71,8 +74,13 @@ const Cart = () => {
                   Process to check out
                 </Link>
               )}
-              {cart.length > 0 && (
-                <button className='btn btn-dark'>PAY NOW</button>
+              {cart.length > 0 && !currentUser && (
+                <Link className='btn btn-dark' to='/login'>
+                  Login to payment
+                </Link>
+              )}
+              {cart.length > 0 && currentUser && (
+                <Checkout totalPrice={totalPrice} />
               )}
             </span>
           </div>

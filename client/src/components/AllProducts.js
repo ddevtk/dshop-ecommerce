@@ -36,7 +36,7 @@ const AllProducts = ({ data }) => {
                 readOnly
               />
             </Box>
-            <h1>Price: {price}</h1>
+            <h1>Price: {price} VND</h1>
           </Link>
         </div>
       </div>

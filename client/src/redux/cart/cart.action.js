@@ -12,6 +12,8 @@ export const addToCart = (quantity, product) => (dispatch, getState) => {
   dispatch({ type: cartActionType.ADD_TO_CART, payload: cartItem });
 
   localStorage.setItem('cart', JSON.stringify(getState().cart));
+
+  window.location.href = '/';
 };
 
 export const deleteItem = id => (dispatch, getState) => {

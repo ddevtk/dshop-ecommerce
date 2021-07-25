@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 import { userActionType } from './user.type';
 
 export const signNewUser = user => async dispatch => {

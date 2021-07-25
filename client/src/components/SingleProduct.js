@@ -1,6 +1,8 @@
 import { useHistory, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Loading from '../components/Loading';
+import 'antd/dist/antd.css';
+import { Rate } from 'antd';
 
 import Rating from '@material-ui/lab/Rating';
 import { useDispatch, useSelector } from 'react-redux';
@@ -113,13 +115,12 @@ const SingleProduct = () => {
               <hr />
               <div className='shadow p-3 mb-5 bg-white rounded ml-2 mr-3'>
                 <h2>Give Your Review</h2>
-                <Rating
-                  name='simple-controlled'
-                  value={value}
-                  onChange={(event, newValue) => {
-                    setValue(newValue);
+                <Rate
+                  allowHalf
+                  defaultValue={value}
+                  onChange={value => {
+                    setValue(value);
                   }}
-                  precision={0.5}
                 />
                 <input
                   type='text'
