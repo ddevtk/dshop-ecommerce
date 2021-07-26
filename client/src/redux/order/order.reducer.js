@@ -4,6 +4,7 @@ const initialState = {
   isLoading: false,
   isSuccess: false,
   isError: false,
+  order: [],
 };
 
 const orderReducer = (state = initialState, action) => {
@@ -28,8 +29,30 @@ const orderReducer = (state = initialState, action) => {
         isLoading: false,
       };
 
+    case orderActionType.GET_ORDER_BY_ID_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+      };
+
+    case orderActionType.GET_ORDER_BY_ID_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        isSuccess: true,
+        order: action.payload,
+      };
+
+    case orderActionType.GET_ORDER_BY_ID_ERROR:
+      return {
+        ...state,
+        isError: true,
+        isLoading: false,
+      };
+
     default:
       return state;
   }
 };
+
 export default orderReducer;

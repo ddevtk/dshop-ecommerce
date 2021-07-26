@@ -7,6 +7,7 @@ import SingleProduct from './components/SingleProduct';
 import Cart from './pages/Cart';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import Order from './pages/Order';
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Route exact path='/cart' component={Cart} />
         <Route exact path='/login' component={Login} />
         <Route exact path='/signup' component={Signup} />
+        <Route exact path='/order' component={Order} />
       </Switch>
     </BrowserRouter>
   );

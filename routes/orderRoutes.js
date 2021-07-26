@@ -1,5 +1,6 @@
 const express = require('express');
 const dotenv = require('dotenv');
+const Order = require('../model/orderModel');
 const { v4: uuidv4 } = require('uuid');
 
 dotenv.config({ path: './config.env' });
@@ -16,7 +17,7 @@ router.post('/placeOrder', async (req, res) => {
   });
   const payment = await stripe.charges.create(
     {
-      amount: totalPrice * 100,
+      amount: totalPrice,
       currency: 'vnd',
       customer: customer.id,
       receipt_email: token.email,
@@ -26,13 +27,42 @@ router.post('/placeOrder', async (req, res) => {
     }
   );
 
-  console.log(payment);
-
   if (payment) {
-    res.status(200).json({ message: 'Payment successfully 🎉🎉🎉' });
+    const order = new Order({
+      userId: currentUser._id,
+      name: currentUser.name,
+      email: currentUser.email,
+      orderItems: cart,
+      shippingAddress: {
+        address: token.card.address_line1,
+        city: token.card.address_city,
+        country: token.card.address_country,
+        postalCode: token.card.address_zip,
+      },
+      totalPrice: totalPrice,
+      transactionId: payment.source.id,
+      isDelivered: false,
+    });
+
+    order.save(err => {
+      if (err) {
+        res.status(400).json({ message: 'Some thing went wrong' });
+      } else {
+        res.status(200).json({ message: 'Payment successfully 🎉🎉🎉' });
+      }
+    });
   } else {
     res.status(400).json({ message: 'Payment failed 🙅‍♂️🙅‍♂️🙅‍♂️' });
   }
+});
+
+router.post('/getOrderById', async (req, res) => {
+  const userId = req.body._id;
+  const orders = await Order.find({ userId: userId });
+  if (orders) {
+    return res.send(orders);
+  }
+  return res.status(400).json({ message: 'Some thing went wrong' });
 });
 
 module.exports = router;
