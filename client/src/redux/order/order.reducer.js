@@ -9,6 +9,13 @@ const initialState = {
 
 const orderReducer = (state = initialState, action) => {
   switch (action.type) {
+    case 'RELOAD_ORDER_STATE':
+      return {
+        isLoading: false,
+        isSuccess: false,
+        isError: false,
+        order: [],
+      };
     case orderActionType.PLACE_ORDER_REQUEST:
       return {
         ...state,
@@ -29,6 +36,34 @@ const orderReducer = (state = initialState, action) => {
         isLoading: false,
       };
 
+    case orderActionType.GET_ORDER_BY_UID_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+      };
+
+    case orderActionType.GET_ORDER_BY_UID_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        isSuccess: true,
+        order: action.payload,
+      };
+
+    case orderActionType.GET_ORDER_BY_UID_ERROR:
+      return {
+        ...state,
+        isError: true,
+        isLoading: false,
+      };
+
+    default:
+      return state;
+  }
+};
+
+const singleOrderReducer = (state = {}, action) => {
+  switch (action.type) {
     case orderActionType.GET_ORDER_BY_ID_REQUEST:
       return {
         ...state,
@@ -39,8 +74,8 @@ const orderReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        isSuccess: true,
-        order: action.payload,
+        isError: false,
+        singleOrder: action.payload,
       };
 
     case orderActionType.GET_ORDER_BY_ID_ERROR:
@@ -55,4 +90,4 @@ const orderReducer = (state = initialState, action) => {
   }
 };
 
-export default orderReducer;
+export { orderReducer, singleOrderReducer };

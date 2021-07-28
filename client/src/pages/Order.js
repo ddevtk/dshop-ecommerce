@@ -2,8 +2,10 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getOrderByUid } from '../redux/order/order.action';
 import { Table } from 'antd';
+import { InfoCircleOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 import { formatPrice } from '../utils/formatPrice';
+import { Link } from 'react-router-dom';
 
 const Order = () => {
   const dispatch = useDispatch();
@@ -21,12 +23,12 @@ const Order = () => {
     {
       title: 'Order ID',
       dataIndex: '_id',
-      width: '20%',
+      width: '18%',
     },
     {
       title: 'Amount',
       dataIndex: 'totalPrice',
-      width: '20%',
+      width: '18%',
       render: totalPrice => {
         return formatPrice(totalPrice);
       },
@@ -34,7 +36,7 @@ const Order = () => {
     {
       title: 'Date',
       dataIndex: 'createdAt',
-      width: '20%',
+      width: '18%',
       render: createdAt => {
         return createdAt.substring(0, 10);
       },
@@ -42,14 +44,25 @@ const Order = () => {
     {
       title: 'Transaction ID',
       dataIndex: 'transactionId',
-      width: '20%',
+      width: '18%',
     },
     {
       title: 'Status',
       dataIndex: 'isDelivered',
-      width: '20%',
+      width: '18%',
       render: isDelivered => {
         return isDelivered ? 'Delivered' : 'Order Placed';
+      },
+    },
+    {
+      width: '10%',
+      render: record => {
+        const { _id } = record;
+        return (
+          <Link to={`order-info/${_id}`}>
+            <InfoCircleOutlined />
+          </Link>
+        );
       },
     },
   ];
@@ -61,7 +74,7 @@ const Order = () => {
       </h1>
       <Table
         onSelect={record => console.log(record)}
-        className='col-md-8'
+        className='col-md-10'
         loading={isLoading}
         columns={columns}
         rowKey={record => record._id}

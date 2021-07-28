@@ -19,3 +19,4 @@ export const deleteItem = id => (dispatch, getState) => {
 
   localStorage.setItem('cart', JSON.stringify(getState().cart));
 };
+

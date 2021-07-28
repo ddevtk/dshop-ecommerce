@@ -24,22 +24,41 @@ export const placeOrder =
       });
 
       dispatch({ type: 'PLACE_ORDER_SUCCESS' });
+      dispatch({ type: 'EMPTY_CART' });
+      localStorage.removeItem('cart');
     } catch (error) {
       dispatch({ type: 'PLACE_ORDER_ERROR' });
     }
   };
 
 export const getOrderByUid = _id => async dispatch => {
-  dispatch({ type: orderActionType.GET_ORDER_BY_ID_REQUEST });
+  dispatch({ type: orderActionType.GET_ORDER_BY_UID_REQUEST });
   try {
-    const res = await axios.post('/api/orders/getOrderById', { _id });
+    const res = await axios.post('/api/orders/getOrderByUid', { _id });
     dispatch({
-      type: orderActionType.GET_ORDER_BY_ID_SUCCESS,
+      type: orderActionType.GET_ORDER_BY_UID_SUCCESS,
       payload: res.data.sort(
         (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
       ),
     });
   } catch (error) {
+    dispatch({ type: orderActionType.GET_ORDER_BY_UID_ERROR });
+  }
+};
+
+export const getOrderById = orderId => async dispatch => {
+  dispatch({ type: orderActionType.GET_ORDER_BY_ID_REQUEST });
+  try {
+    const res = await axios.post('/api/orders/getOrderById', { orderId });
+    dispatch({
+      type: orderActionType.GET_ORDER_BY_ID_SUCCESS,
+      payload: res.data,
+    });
+  } catch (error) {
     dispatch({ type: orderActionType.GET_ORDER_BY_ID_ERROR });
   }
+};
+
+export const reloadOrderState = () => dispatch => {
+  dispatch({ type: 'RELOAD_ORDER_STATE' });
 };

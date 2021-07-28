@@ -56,13 +56,20 @@ router.post('/placeOrder', async (req, res) => {
   }
 });
 
-router.post('/getOrderById', async (req, res) => {
+router.post('/getOrderByUid', async (req, res) => {
   const userId = req.body._id;
   const orders = await Order.find({ userId: userId });
   if (orders) {
     return res.send(orders);
   }
   return res.status(400).json({ message: 'Some thing went wrong' });
+});
+router.post('/getOrderById', async (req, res) => {
+  const singleOrder = await Order.find({ _id: req.body.orderId });
+  if (singleOrder) {
+    return res.send(singleOrder);
+  }
+  return res.status(400).json({ message: 'Could not find order with that ID' });
 });
 
 module.exports = router;

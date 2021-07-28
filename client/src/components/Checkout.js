@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import StripeCheckout from 'react-stripe-checkout';
-import { placeOrder } from '../redux/order/order.action';
+import { placeOrder, reloadOrderState } from '../redux/order/order.action';
 import { message, notification } from 'antd';
 import 'antd/dist/antd.css';
 
@@ -13,6 +13,13 @@ function Checkout({ totalPrice }) {
   const onToken = token => {
     dispatch(placeOrder({ token, totalPrice }));
   };
+
+  useEffect(() => {
+    return () => {
+      dispatch(reloadOrderState());
+    };
+  }, []);
+
   return (
     <>
       {isLoading && message.loading({ content: 'Loading...' })}

@@ -8,6 +8,7 @@ import Cart from './pages/Cart';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Order from './pages/Order';
+import OrderInfo from './pages/OrderInfo';
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
         <Route exact path='/login' component={Login} />
         <Route exact path='/signup' component={Signup} />
         <Route exact path='/order' component={Order} />
+        <Route exact path='/order-info/:orderId' component={OrderInfo} />
       </Switch>
     </BrowserRouter>
   );
