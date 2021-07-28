@@ -5,6 +5,7 @@ import {
   allProductReducer,
   singleProductReducer,
 } from './products/product.reducer';
+import reviewReducer from './review/review.reducer';
 import { signupReducer, loginReducer } from './user/user.reducer';
 
 const rootReducer = combineReducers({
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   login: loginReducer,
   order: orderReducer,
   singleOrder: singleOrderReducer,
+  review: reviewReducer,
 });
 
 export default rootReducer;

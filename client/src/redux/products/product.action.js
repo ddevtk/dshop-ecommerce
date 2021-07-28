@@ -78,3 +78,7 @@ export const filterProduct =
       });
     }
   };
+
+export const reloadSingleProduct = () => dispatch => {
+  dispatch({ type: 'RELOAD_PRODUCT' });
+};

@@ -33,7 +33,7 @@ const allProductReducer = (state = initialAllProducts, action) => {
 const initialSingleProducts = {
   isLoading: false,
   isError: null,
-  product: [],
+  product: {},
 };
 
 const singleProductReducer = (state = initialSingleProducts, action) => {
@@ -46,6 +46,13 @@ const singleProductReducer = (state = initialSingleProducts, action) => {
 
     case ProductActionType.GET_SINGLE_PRODUCT_ERROR:
       return { ...state, isLoading: false, isError: action.payload };
+
+    case 'RELOAD_PRODUCT':
+      return {
+        isLoading: false,
+        isError: null,
+        product: {},
+      };
 
     default:
       return state;

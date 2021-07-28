@@ -5,16 +5,25 @@ import 'antd/dist/antd.css';
 import { Rate } from 'antd';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { getSingleProduct } from '../redux/products/product.action';
+import {
+  getSingleProduct,
+  reloadSingleProduct,
+} from '../redux/products/product.action';
 import { addToCart } from '../redux/cart/cart.action';
 import { formatPrice } from '../utils/formatPrice';
+import { sendReview } from '../redux/review/review.action';
 
 const SingleProduct = () => {
   const params = useParams();
   const history = useHistory();
   const { id } = params;
+
   const [value, setValue] = useState(4);
   const [quantity, setQuantity] = useState(1);
+  const [review, setReview] = useState('');
+  const [isReview, setIsReview] = useState(false);
+
+  console.log(isReview);
 
   const dispatch = useDispatch();
 
@@ -22,14 +31,65 @@ const SingleProduct = () => {
     state => state.singleProduct
   );
 
+  const { user } = useSelector(state => state.login);
+
   const addToCartHandler = () => {
     dispatch(addToCart(quantity, product));
   };
 
+  const addReview = () => {
+    console.log('hello');
+    console.log(product);
+
+    if (product.reviews.length > 0) {
+      product.reviews.forEach(item => {
+        if (item.userId === user._id) {
+          setIsReview(true);
+          return;
+        }
+        const productId = product._id;
+        const reviewObj = {
+          rating: value,
+          review: review,
+        };
+        dispatch(sendReview(productId, reviewObj));
+        setIsReview(true);
+      });
+    } else {
+      const productId = product._id;
+      const reviewObj = {
+        rating: value,
+        review: review,
+      };
+      dispatch(sendReview(productId, reviewObj));
+      setIsReview(true);
+    }
+  };
+
   useEffect(() => {
     dispatch(getSingleProduct(id));
+
+    return () => {
+      setIsReview(false);
+      dispatch(reloadSingleProduct());
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    !isLoading &&
+      Object.keys(product).length > 0 &&
+      product.reviews.forEach(item => {
+        if (item.userId === user._id) {
+          console.log(item.userId);
+          console.log(user._id);
+          console.log('hello 1');
+          setIsReview(true);
+          return;
+        }
+        setIsReview(false);
+      });
+  }, [product]);
 
   useEffect(() => {
     if (isError) {
@@ -116,6 +176,7 @@ const SingleProduct = () => {
               <div className='shadow p-3 mb-5 bg-white rounded ml-2 mr-3'>
                 <h2>Give Your Review</h2>
                 <Rate
+                  style={{ fontSize: '20px' }}
                   allowHalf
                   defaultValue={value}
                   onChange={value => {
@@ -125,12 +186,38 @@ const SingleProduct = () => {
                 <input
                   type='text'
                   className='form-control mt-2'
+                  value={review}
+                  onChange={e => setReview(e.target.value)}
                   name='review'
                 />
-                <button type='button' className='btn mt-3 btn-dark'>
+                <button
+                  type='button'
+                  className={`${
+                    !isReview
+                      ? 'btn mt-3 btn-dark'
+                      : 'btn mt-3 btn-dark btn-active'
+                  }`}
+                  onClick={addReview}
+                >
                   Submit Review
                 </button>
+                <hr />
                 <h1 className='mt-3'>Latest Reviews</h1>
+                {product.reviews?.map((review, id) => {
+                  const { rating, comment, name } = review;
+                  return (
+                    <div key={id}>
+                      <Rate allowHalf defaultValue={rating} />
+                      <p>{comment}</p>
+                      <p>
+                        By:{' '}
+                        <b>{`${name.slice(0, 1).toUpperCase()}${name
+                          .slice(1)
+                          .toLowerCase()}`}</b>
+                      </p>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
