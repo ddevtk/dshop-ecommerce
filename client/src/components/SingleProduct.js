@@ -23,8 +23,6 @@ const SingleProduct = () => {
   const [review, setReview] = useState('');
   const [isReview, setIsReview] = useState(false);
 
-  console.log(isReview);
-
   const dispatch = useDispatch();
 
   const { isLoading, isError, product } = useSelector(
@@ -38,9 +36,6 @@ const SingleProduct = () => {
   };
 
   const addReview = () => {
-    console.log('hello');
-    console.log(product);
-
     if (product.reviews.length > 0) {
       product.reviews.forEach(item => {
         if (item.userId === user._id) {
@@ -53,6 +48,7 @@ const SingleProduct = () => {
           review: review,
         };
         dispatch(sendReview(productId, reviewObj));
+
         setIsReview(true);
       });
     } else {
@@ -63,6 +59,11 @@ const SingleProduct = () => {
       };
       dispatch(sendReview(productId, reviewObj));
       setIsReview(true);
+    }
+    // eslint-disable-next-line no-restricted-globals
+    let confirmMessage = confirm('Refresh page to load comment');
+    if (confirmMessage === true) {
+      window.location.reload();
     }
   };
 
@@ -80,10 +81,7 @@ const SingleProduct = () => {
     !isLoading &&
       Object.keys(product).length > 0 &&
       product.reviews.forEach(item => {
-        if (item.userId === user._id) {
-          console.log(item.userId);
-          console.log(user._id);
-          console.log('hello 1');
+        if (item.userId === user?._id) {
           setIsReview(true);
           return;
         }
@@ -207,7 +205,7 @@ const SingleProduct = () => {
                   const { rating, comment, name } = review;
                   return (
                     <div key={id}>
-                      <Rate allowHalf defaultValue={rating} />
+                      <Rate allowHalf defaultValue={rating} disabled />
                       <p>{comment}</p>
                       <p>
                         By:{' '}
