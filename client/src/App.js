@@ -9,6 +9,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Order from './pages/Order';
 import OrderInfo from './pages/OrderInfo';
+import Profile from './pages/Profile';
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
         <Route exact path='/signup' component={Signup} />
         <Route exact path='/order' component={Order} />
         <Route exact path='/order-info/:orderId' component={OrderInfo} />
+        <Route exact path='/profile' component={Profile} />
       </Switch>
     </BrowserRouter>
   );

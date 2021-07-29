@@ -41,6 +41,7 @@ router.post('/products/addReview', async (req, res) => {
     const rating =
       doc.reviews.map(item => item.rating).reduce((acc, cur) => acc + cur) /
       doc.reviews.length;
+
     doc.rating = rating.toFixed(2);
 
     doc.save();

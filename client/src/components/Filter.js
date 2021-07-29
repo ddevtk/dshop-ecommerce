@@ -16,10 +16,9 @@ function Filter({ products }) {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    console.log(search);
+  const filterHandler = () => {
     dispatch(filterProduct({ sort, category, search }));
-  }, [category, sort, search]);
+  };
 
   const clearFilter = () => {
     setSearch('');
@@ -40,7 +39,7 @@ function Filter({ products }) {
           }}
         />
       </Col>
-      <Col span={5} offset={1}>
+      <Col span={5}>
         <Select
           value={sort}
           onChange={value => {
@@ -53,7 +52,7 @@ function Filter({ products }) {
           <Option value='lth'>Low to high</Option>
         </Select>
       </Col>
-      <Col span={5} offset={1}>
+      <Col span={5}>
         <Select
           value={category}
           onChange={value => {
@@ -76,7 +75,15 @@ function Filter({ products }) {
           })}
         </Select>
       </Col>
-      <Col span={5} offset={1}>
+      <Col span={4}>
+        <Button
+          style={{ backgroundColor: '#010133', color: 'white' }}
+          onClick={filterHandler}
+        >
+          Search
+        </Button>
+      </Col>
+      <Col span={4}>
         <Button
           style={{ backgroundColor: '#010133', color: 'white' }}
           onClick={clearFilter}

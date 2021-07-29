@@ -22,6 +22,7 @@ mongoose
   .then(() => console.log('DB connection successful!'));
 
 app.use(bodyParser.json());
+
 app.use('/api', productsRoute);
 app.use('/api/users', userRoute);
 app.use('/api/orders', orderRoute);

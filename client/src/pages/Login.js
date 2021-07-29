@@ -4,6 +4,8 @@ import { Link, useHistory } from 'react-router-dom';
 import Error from '../components/Error';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { loginUser } from '../redux/user/user.action';
+import {  notification } from 'antd';
+import 'antd/dist/antd.css';
 
 function Login() {
   const email = useRef(null);
@@ -11,7 +13,9 @@ function Login() {
   const history = useHistory();
 
   const dispatch = useDispatch();
-  const { isLoading, isError, user } = useSelector(state => state.login);
+  const { isLoading, isError, user, isSuccess } = useSelector(
+    state => state.login
+  );
 
   const submitHandler = e => {
     e.preventDefault();
@@ -51,6 +55,11 @@ function Login() {
             </div>
             {isError && <Error error={isError} />}
             {isLoading && <LoadingSpinner />}
+            {isSuccess &&
+              notification.success({
+                message: 'Login successfully 🙌🙌🙌',
+                duration: 2,
+              })}
             <form onSubmit={e => submitHandler(e)}>
               <input
                 className='form-control'

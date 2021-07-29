@@ -55,4 +55,23 @@ router.post('/login', (req, res) => {
   );
 });
 
+router.post('/update-profile', async (req, res) => {
+  const { _id, name, email } = req.body;
+  console.log(req.body);
+  const user = await User.findByIdAndUpdate(
+    { _id: _id },
+    {
+      name: name,
+      email: email,
+    }
+  );
+  if (user) {
+    console.log(user);
+    return res.send('User profile update successfully');
+  }
+  return res.status(400).json({
+    message: 'Email already registered',
+  });
+});
+
 module.exports = router;

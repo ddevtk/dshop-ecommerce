@@ -8,9 +8,7 @@ import Filter from '../components/Filter';
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { isLoading, isError, products, isAll, filterProducts } = useSelector(
-    state => state.products
-  );
+  const { isLoading, isError, products } = useSelector(state => state.products);
 
   useEffect(() => {
     dispatch(getAllProducts());

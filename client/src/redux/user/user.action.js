@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
 import { userActionType } from './user.type';
 
 export const signNewUser = user => async dispatch => {
@@ -37,4 +36,38 @@ export const logoutUser = () => dispatch => {
   dispatch({ type: userActionType.LOGOUT_USER });
 
   window.location.href = '/';
+};
+
+export const updateProfile = (update, userId) => async (dispatch, getState) => {
+  dispatch({ type: userActionType.UPDATE_PROFILE_REQUEST });
+
+  try {
+    const res = await axios.post('/api/users/update-profile', {
+      name: update.name,
+      email: update.email,
+      _id: userId,
+    });
+
+    console.log(res);
+
+    dispatch({ type: userActionType.UPDATE_PROFILE_SUCCESS });
+    localStorage.setItem(
+      'currentUser',
+      JSON.stringify({
+        ...getState().login,
+        user: {
+          ...getState().login.user,
+          name: update.name,
+          email: update.email,
+        },
+      })
+    );
+    dispatch({ type: 'UPDATE_USER_STATE', payload: update });
+  } catch (error) {
+    dispatch({ type: userActionType.UPDATE_PROFILE_ERROR });
+  }
+};
+
+export const removeProfileState = () => dispatch => {
+  dispatch({ type: 'REMOVE_PROFILE_STATE' });
 };

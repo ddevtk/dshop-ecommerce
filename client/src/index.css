@@ -45,6 +45,9 @@ h1 {
 input:not(:last-child) {
   margin-bottom: 10px;
 }
+input:focus {
+  border-color: none;
+}
 .gutter-box {
   padding: 8px 0;
   background: #00a0e9;

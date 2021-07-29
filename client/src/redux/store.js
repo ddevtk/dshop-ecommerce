@@ -20,6 +20,8 @@ const initialState = {
   login: { ...login },
 };
 
+console.log('store');
+
 const store = createStore(
   rootReducer,
   initialState,

@@ -14,7 +14,7 @@ function Checkout({ totalPrice }) {
     dispatch(placeOrder({ token, totalPrice }));
   };
 
-  useEffect(() => {
+  useEffect(() => { 
     return () => {
       dispatch(reloadOrderState());
     };
