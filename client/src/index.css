@@ -93,3 +93,15 @@ tr td:last-child {
   color: #010133 !important;
   font-size: 16px;
 }
+.ant-modal-footer {
+  display: none;
+}
+
+.ant-modal-footer {
+  position: relative;
+}
+/* .ant-btn-primary {
+  position: absolute;
+  right: -129%;
+  bottom: -92px;
+} */

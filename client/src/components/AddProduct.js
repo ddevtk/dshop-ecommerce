@@ -29,7 +29,7 @@ const AddProduct = () => {
     try {
       const res = await axios.post('/api/products/add', value);
       console.log(res);
-      notification.success({ message: 'Deleted successfully' });
+      notification.success({ message: 'Product added successfully' });
     } catch (error) {
       console.log(error);
     }

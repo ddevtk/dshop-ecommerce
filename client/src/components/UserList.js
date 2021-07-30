@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Table } from 'antd';
-import { DeleteOutlined } from '@ant-design/icons';
+import { DeleteTwoTone } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 import axios from 'axios';
 import { notification, Popconfirm } from 'antd';
@@ -72,7 +72,7 @@ const UserList = () => {
             cancelText='No'
             onConfirm={() => confirmHandler(record._id)}
           >
-            <DeleteOutlined style={{ cursor: 'pointer' }} />
+            <DeleteTwoTone style={{ cursor: 'pointer' }} />
           </Popconfirm>
         );
       },

@@ -73,4 +73,24 @@ router.post('/products/add', (req, res) => {
   });
 });
 
+router.post('/products/update', async (req, res) => {
+  const { value, id } = req.body;
+  const { name, price, description, countInStock, image, category } = value;
+  const newProduct = await Product.findByIdAndUpdate(
+    { _id: id },
+    {
+      name: name,
+      price: parseInt(price),
+      description: description,
+      countInStock: parseInt(countInStock),
+      image: image,
+      category: category,
+    }
+  );
+  if (newProduct) {
+    return res.send({ message: 'Update successfully' });
+  }
+  return res.status(400).json({ message: 'Some thing went wrong' });
+});
+
 module.exports = router;
