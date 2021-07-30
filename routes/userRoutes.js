@@ -57,7 +57,6 @@ router.post('/login', (req, res) => {
 
 router.post('/update-profile', async (req, res) => {
   const { _id, name, email } = req.body;
-  console.log(req.body);
   const user = await User.findByIdAndUpdate(
     { _id: _id },
     {
@@ -66,7 +65,6 @@ router.post('/update-profile', async (req, res) => {
     }
   );
   if (user) {
-    console.log(user);
     return res.send('User profile update successfully');
   }
   return res.status(400).json({
@@ -74,4 +72,20 @@ router.post('/update-profile', async (req, res) => {
   });
 });
 
+router.get('/getAllUser', async (req, res) => {
+  const users = await User.find({});
+
+  if (users) {
+    return res.send(users);
+  }
+  return res.status(400).json({ message: 'Some thing went wrong' });
+});
+
+router.post('/delete', async (req, res) => {
+  const user = await User.findByIdAndRemove({ _id: req.body._id });
+  if (user) {
+    return res.send('deleted successfully');
+  }
+  return res.status(400).json({ message: 'Some thing went wrong' });
+});
 module.exports = router;

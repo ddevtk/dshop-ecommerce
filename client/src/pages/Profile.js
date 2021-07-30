@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Modal } from 'antd';
+
 import 'antd/dist/antd.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeProfileState, updateProfile } from '../redux/user/user.action';
 import LoadingSpinner from '../components/LoadingSpinner';
 import Error from '../components/Error';
-import { notification, Form, Input } from 'antd';
+import { notification } from 'antd';
 import 'antd/dist/antd.css';
 
 const Profile = () => {

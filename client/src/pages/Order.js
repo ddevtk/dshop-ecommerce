@@ -73,7 +73,6 @@ const Order = () => {
         Order
       </h1>
       <Table
-        onSelect={record => console.log(record)}
         className='col-md-10'
         loading={isLoading}
         columns={columns}

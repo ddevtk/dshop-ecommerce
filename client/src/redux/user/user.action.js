@@ -42,13 +42,11 @@ export const updateProfile = (update, userId) => async (dispatch, getState) => {
   dispatch({ type: userActionType.UPDATE_PROFILE_REQUEST });
 
   try {
-    const res = await axios.post('/api/users/update-profile', {
+    await axios.post('/api/users/update-profile', {
       name: update.name,
       email: update.email,
       _id: userId,
     });
-
-    console.log(res);
 
     dispatch({ type: userActionType.UPDATE_PROFILE_SUCCESS });
     localStorage.setItem(

@@ -1,4 +1,4 @@
-const { userActionType } = require('./user.type');
+import { userActionType } from './user.type';
 
 const signupState = {
   isLoading: false,
@@ -13,7 +13,7 @@ const loginState = {
   user: null,
 };
 
-const signupReducer = (state = signupState, action) => {
+export const signupReducer = (state = signupState, action) => {
   switch (action.type) {
     case userActionType.SIGNUP_REQUEST:
       return {
@@ -39,7 +39,7 @@ const signupReducer = (state = signupState, action) => {
   }
 };
 
-const loginReducer = (state = loginState, action) => {
+export const loginReducer = (state = loginState, action) => {
   switch (action.type) {
     case userActionType.LOGIN_REQUEST:
       return {
@@ -82,7 +82,7 @@ const loginReducer = (state = loginState, action) => {
   }
 };
 
-const updateProfileReducer = (state = signupState, action) => {
+export const updateProfileReducer = (state = signupState, action) => {
   switch (action.type) {
     case userActionType.UPDATE_PROFILE_REQUEST:
       return {
@@ -116,5 +116,3 @@ const updateProfileReducer = (state = signupState, action) => {
       return state;
   }
 };
-
-module.exports = { signupReducer, loginReducer, updateProfileReducer };

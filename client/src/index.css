@@ -77,3 +77,16 @@ tr td:last-child {
   pointer-events: none;
   opacity: 0.65;
 }
+.admin {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  color: #010133 !important;
+}
+.admin li {
+  box-sizing: border-box;
+}
+.admin li a {
+  color: #010133 !important;
+  font-size: 16px;
+}
