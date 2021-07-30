@@ -81,8 +81,8 @@ const UserList = () => {
 
   return (
     <div>
+      <h2 style={{ textAlign: 'center' }}>User list</h2>
       <Table
-        // className='col-md-10'
         loading={isLoading}
         columns={columns}
         rowKey={record => record._id}

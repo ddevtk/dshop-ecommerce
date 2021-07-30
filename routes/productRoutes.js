@@ -47,5 +47,30 @@ router.post('/products/addReview', async (req, res) => {
     doc.save();
   });
 });
+router.post('/products/delete', async (req, res) => {
+  const product = await Product.findByIdAndRemove({ _id: req.body._id });
+  if (product) {
+    return res.send('deleted successfully');
+  }
+  return res.status(400).json({ message: 'Some thing went wrong' });
+});
+router.post('/products/add', (req, res) => {
+  const { name, price, description, countInStock, image, category } = req.body;
+  const product = new Product({
+    name: name,
+    price: parseInt(price),
+    description: description,
+    countInStock: parseInt(countInStock),
+    image: image,
+    category: category,
+    review: [],
+  });
+  product.save(err => {
+    if (err) {
+      return res.status(200).json({ message: 'Some thing went wrong' });
+    }
+    return res.send('Product added successfully');
+  });
+});
 
 module.exports = router;
