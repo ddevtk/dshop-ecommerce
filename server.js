@@ -2,6 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const path = require('path');
 const productsRoute = require('./routes/productRoutes');
 const userRoute = require('./routes/userRoutes');
 const orderRoute = require('./routes/orderRoutes');
@@ -26,6 +27,14 @@ app.use(bodyParser.json());
 app.use('/api', productsRoute);
 app.use('/api/users', userRoute);
 app.use('/api/orders', orderRoute);
+
+if (process.env.NODE_ENV) {
+  app.use('/', express.static('client/build'));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client/build/index.html'));
+  });
+}
 
 const port = process.env.PORT;
 app.listen(port, () => console.log(`App listening on port ${port}!`));
