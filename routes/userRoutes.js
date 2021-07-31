@@ -84,7 +84,7 @@ router.get('/getAllUser', async (req, res) => {
 router.post('/delete', async (req, res) => {
   const user = await User.findByIdAndRemove({ _id: req.body._id });
   if (user) {
-    return res.send('deleted successfully');
+    return res.send('Deleted successfully');
   }
   return res.status(400).json({ message: 'Some thing went wrong' });
 });

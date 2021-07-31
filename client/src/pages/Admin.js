@@ -6,7 +6,6 @@ import AddProduct from '../components/AddProduct';
 import OrderList from '../components/OrderList';
 
 const Admin = () => {
-  console.log('hello from admin');
   return (
     <BrowserRouter>
       <div className='row justify-content-center mt-5'>

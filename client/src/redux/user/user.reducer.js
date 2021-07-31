@@ -48,7 +48,6 @@ export const loginReducer = (state = loginState, action) => {
       };
 
     case userActionType.LOGIN_SUCCESS:
-      console.log(action.payload);
       return {
         ...state,
         isLoading: false,

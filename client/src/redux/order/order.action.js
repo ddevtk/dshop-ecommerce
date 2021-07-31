@@ -47,7 +47,6 @@ export const getOrderByUid = _id => async dispatch => {
 };
 
 export const getOrderById = orderId => async dispatch => {
-  console.log('hello');
   dispatch({ type: orderActionType.GET_ORDER_BY_ID_REQUEST });
   try {
     const res = await axios.post('/api/orders/getOrderById', { orderId });

@@ -27,8 +27,7 @@ const AddProduct = () => {
 
   const addProductHandler = async value => {
     try {
-      const res = await axios.post('/api/products/add', value);
-      console.log(res);
+      await axios.post('/api/products/add', value);
       notification.success({ message: 'Product added successfully' });
     } catch (error) {
       console.log(error);
@@ -37,7 +36,6 @@ const AddProduct = () => {
 
   const onFinish = values => {
     addProductHandler(values);
-    console.log(values);
   };
 
   return (

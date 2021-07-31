@@ -6,7 +6,6 @@ export const sendReview =
     dispatch({ type: reviewActionType.ADD_REVIEW_REQUEST });
     try {
       const { user } = getState().login;
-      console.log(reviewObj, productId, user);
       await axios.post('/api/products/addReview', {
         review: reviewObj,
         productId: productId,

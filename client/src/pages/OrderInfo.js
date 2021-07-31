@@ -13,7 +13,6 @@ function OrderInfo() {
   const { singleOrder, isLoading, isError } = useSelector(
     state => state.singleOrder
   );
-  console.log(singleOrder);
 
   useEffect(() => {
     dispatch(getOrderById(params.orderId));

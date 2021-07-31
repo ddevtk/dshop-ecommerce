@@ -72,4 +72,10 @@ router.post('/getOrderById', async (req, res) => {
   return res.status(400).json({ message: 'Could not find order with that ID' });
 });
 
+router.get('/getAllOrders', async (req, res) => {
+  const orders = await Order.find({});
+  if (orders) return res.send(orders);
+  return res.status.json({ message: 'Some thing went wrong' });
+});
+
 module.exports = router;

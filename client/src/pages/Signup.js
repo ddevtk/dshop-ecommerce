@@ -24,7 +24,6 @@ function Signup() {
       password: pwd.current.value,
     };
     if (pwd.current.value === cPwd.current.value) {
-      console.log('hello');
       dispatch(signNewUser(user));
     }
   };
