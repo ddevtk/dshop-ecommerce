@@ -1,3 +1,1 @@
-# dshop-ecommerce
-email: duong@gmail.com
-password: thachraucau
+access /admin to setup dashboard
