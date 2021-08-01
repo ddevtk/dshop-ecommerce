@@ -1,4 +1,4 @@
-import { useHistory, useParams } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Loading from '../components/Loading';
 import 'antd/dist/antd.css';
@@ -189,17 +189,24 @@ const SingleProduct = () => {
                   onChange={e => setReview(e.target.value)}
                   name='review'
                 />
-                <button
-                  type='button'
-                  className={`${
-                    !isReview
-                      ? 'btn mt-3 btn-dark'
-                      : 'btn mt-3 btn-dark btn-active'
-                  }`}
-                  onClick={addReview}
-                >
-                  Submit Review
-                </button>
+                {user ? (
+                  <button
+                    type='button'
+                    className={`${
+                      !isReview
+                        ? 'btn mt-3 btn-dark'
+                        : 'btn mt-3 btn-dark btn-active'
+                    }`}
+                    onClick={addReview}
+                  >
+                    Submit Review
+                  </button>
+                ) : (
+                  <Link to='/login' className='btn mt-3 btn-dark' type='button'>
+                    LOGIN TO REVIEW
+                  </Link>
+                )}
+
                 <hr />
                 <h1 className='mt-3'>Latest Reviews</h1>
                 {product.reviews?.map((review, id) => {
